@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class ListTester<T extends List<Integer>> {
     private T list;
-    private static final int LIST_SIZE = 1_000_000;
+    private static final int LIST_SIZE = 10_000;
     
     /**
      * Constructor that accepts any concrete List implementation.
@@ -24,7 +24,7 @@ public class ListTester<T extends List<Integer>> {
     }
     
     /**
-     * Populates the list with 1 million Integer items.
+     * Populates the list with 10,000 Integer items.
      */
     public void populateList() {
         list.clear();
@@ -40,8 +40,9 @@ public class ListTester<T extends List<Integer>> {
      */
     public long timeForLoop() {
         long startTime = System.nanoTime();
-        int sum = 0;
-        for (int i = 0; i < list.size(); i++) {
+        long sum = 0;
+        int size = list.size();
+        for (int i = 0; i < size; i++) {
             sum += list.get(i);
         }
         long endTime = System.nanoTime();
@@ -55,9 +56,10 @@ public class ListTester<T extends List<Integer>> {
      */
     public long timeWhileLoop() {
         long startTime = System.nanoTime();
-        int sum = 0;
+        long sum = 0;
+        int size = list.size();
         int i = 0;
-        while (i < list.size()) {
+        while (i < size) {
             sum += list.get(i);
             i++;
         }
@@ -72,7 +74,7 @@ public class ListTester<T extends List<Integer>> {
      */
     public long timeForEachLoop() {
         long startTime = System.nanoTime();
-        int sum = 0;
+        long sum = 0;
         for (Integer value : list) {
             sum += value;
         }
